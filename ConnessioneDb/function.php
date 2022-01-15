@@ -73,9 +73,9 @@ function getUsers( array $parms = []){
   $orderDir = (array_key_exists('orderDir', $parms))? $parms['orderDir'] : 'ASC';
 
   $limit = ((int)array_key_exists('recordsPerPage', $parms))? $parms['recordsPerPage'] : 10;
-  $page = (int) array_key_exists('page', $parms)? $parms['page'] : 0;
+  $page = ((int)array_key_exists('page', $parms))? $parms['page'] : 0;
   $start = $limit * ($page - 1);
-  //echo 2;
+
   if ($start<0){
     $start = 0;
   };
