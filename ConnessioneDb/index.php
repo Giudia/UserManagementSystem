@@ -3,7 +3,7 @@
   require_once 'view\head.php';
 
   $url = $_SERVER['PHP_SELF'];
-  $orderDir = getParms('orderDir', 'DESC');
+  $orderDir = getParms('orderDir', 'ASC');
   $orderby = getParms('orderby', 'UserID');
   $orderByColumns = getConfig('orderByColumns', ['UserID', 'UserName', 'UserCodiceFiscale', 'UserEmail', 'UserEta']);
   $recordsPerPage = getParms('recordsPerPage', getConfig('numberRecord'));
@@ -18,7 +18,7 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
-       <h1>USER MANAGEMENT SYSTEM </h1>
+       <h1 class="text-center">USER MANAGEMENT SYSTEM </h1>
        <hr>
        <?php
 

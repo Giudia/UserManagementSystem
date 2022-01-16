@@ -8,6 +8,10 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+a{
+  text-decoration: none;
+  color: inherit;
+}
 .footer {
   position: absolute;
   bottom: 0;

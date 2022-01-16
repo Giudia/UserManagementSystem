@@ -101,7 +101,7 @@ function getUsers( array $parms = []){
     $sql.= " OR UserEmail LIKE '%$search%'";
   }
   $sql.= " ORDER BY $orderby $orderDir LIMIT $start,$limit";
-echo $sql;
+  //echo $sql;
   $result = $conn->query($sql);
 
   //INizializzo la variabile  per evitare errori di php
