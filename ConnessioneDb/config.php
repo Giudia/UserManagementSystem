@@ -13,6 +13,7 @@ $config = [
     ],
     'orderByColumns' => [
       'UserID', 'UserName', 'UserCodiceFiscale', 'UserEmail', 'UserEta'
-    ]
+    ],
+    'numLinkNavigator'=> 5,
   ];
 ?>

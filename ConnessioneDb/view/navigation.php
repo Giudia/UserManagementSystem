@@ -1,4 +1,6 @@
-
+<?php
+  $numLinks = getConfig('numLinkNavigator', 3);
+?>
 
 <nav>
   <ul class="pagination justify-content-center">
@@ -6,15 +8,32 @@
       <a class="page-link" href="<?="$url?page=".($page-1)?>" tabindex="-1" aria-disabled="true">Previous</a>
     </li>
 
-    <?php for ($i=1; $i <= $numPages ; $i++):
-      $class = $i == $page ? 'active disable': '';
-      if ($class):
+    <?php
+      $startValue = $page - $numLinks;
+      $startValue = $startValue < 1 ? 1 : $startValue;
+
+      for ($i=$startValue; $i <$page ; $i++):
     ?>
-      <li class="page-item <?=$class?>"><a class="page-link"><?=$i?></a></li>
-    <?php else : ?>
-      <li class="page-item"><a class="page-link" href="<?="$url?page=$i"?>"><?=$i?></a></li>
-    <?php endif;
-    endfor ?>
+        <li class="page-item"><a class="page-link" href="<?="$url?page=$i"?>"><?=$i?></a></li>
+    <?php
+      endfor
+    ?>
+
+      <li class="page-item active"><a class="page-link"><?=$page?></a></li>
+
+    <?php
+      $startValue = $page + 1;
+      $startValue = $startValue < 1 ? 1 : $startValue;
+
+      $endValue = $page + $numLinks;
+      $endValue = $endValue > $numPages ? $numPages : $endValue;
+
+      for ($i = $startValue; $i <= $endValue ; $i++):
+    ?>
+        <li class="page-item"><a class="page-link" href="<?="$url?page=$i"?>"><?=$i?></a></li>
+    <?php
+      endfor
+    ?>
 
     <li class="page-item <?= $page == $numPages? 'disabled' : '' ?>">
       <a class="page-link" href="<?="$url?page=".($page+1)?>">Next</a>

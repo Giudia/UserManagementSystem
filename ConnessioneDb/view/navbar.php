@@ -1,6 +1,3 @@
-<?php
-echo $page;
-?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -54,7 +51,7 @@ echo $page;
               <?php endforeach; ?>
             </select>
           </div>
-          <div class="form-group">
+          <div class="form-group d-flex">
             <input class="form-control me-2" name="search" id="search" value="<?=$search?>"type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success"  onclick="document.forms.formSearch.page.value=1" type="submit">Search</button>
           </div>
