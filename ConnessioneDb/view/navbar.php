@@ -1,5 +1,5 @@
 <?php
-
+echo $page;
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,7 +22,8 @@
          ?>
         <a class="nav-link <?= $class ?>" href="index.php?action=insert"><i class="fas fa-user-plus"></i> Add user</a>
 
-        <form class="form-inline mt-2 mt-md-0 d-flex" action="<?=$url?>" id="formSearch" method="get" >
+        <form class="form-inline mt-2 mt-md-0 d-flex" action="<?=$url?>" name="formSearch" id="formSearch" method="get" >
+          <input type="hidden" name="page" value="<?=$page?>">
           <div class="form-group">
 
             <select id="orderby" class="form-control" name="orderby" onchange="document.forms.formSearch.submit()">
@@ -46,22 +47,21 @@
           </div>
 
           <div class="form-group">
-            <select id="recordsPerPage" class="form-control" name="recordsPerPage" onchange="document.forms.formSearch.submit()">
+            <select id="recordsPerPage" class="form-control" name="recordsPerPage" onchange="document.forms.formSearch.page.value=1; document.forms.formSearch.submit()" >
               <option value="">Seleziona</option>
               <?php foreach ($recordPerPageOptions as $value): ?>
                 <option <?= ($recordsPerPage==$value)?'selected':'' ?> value="<?=$value?>"><?=$value?></option>
               <?php endforeach; ?>
             </select>
           </div>
-
+          <div class="form-group">
+            <input class="form-control me-2" name="search" id="search" value="<?=$search?>"type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success"  onclick="document.forms.formSearch.page.value=1" type="submit">Search</button>
+          </div>
         </form>
 
       </div>
 
-      <form class="d-flex">
-        <input class="form-control me-2" name="search" id="search" value="<?=$search?>"type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
 
     </div>
   </div>
