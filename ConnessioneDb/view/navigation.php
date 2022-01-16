@@ -5,7 +5,7 @@
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item <?= $page == 1? 'disabled' : '' ?>">
-      <a class="page-link" href="<?="$url?page=".($page-1)?>" tabindex="-1" aria-disabled="true">Previous</a>
+      <a class="page-link" href="<?="$url?$navOrderByQueryString&page=".($page-1)?>" tabindex="-1" aria-disabled="true">Previous</a>
     </li>
 
     <?php
@@ -14,7 +14,7 @@
 
       for ($i=$startValue; $i <$page ; $i++):
     ?>
-        <li class="page-item"><a class="page-link" href="<?="$url?page=$i"?>"><?=$i?></a></li>
+        <li class="page-item"><a class="page-link" href="<?="$url?$navOrderByQueryString&page=$i"?>"><?=$i?></a></li>
     <?php
       endfor
     ?>
@@ -30,7 +30,7 @@
 
       for ($i = $startValue; $i <= $endValue ; $i++):
     ?>
-        <li class="page-item"><a class="page-link" href="<?="$url?page=$i"?>"><?=$i?></a></li>
+        <li class="page-item"><a class="page-link" href="<?="$url?$navOrderByQueryString&page=$i"?>"><?=$i?></a></li>
     <?php
       endfor
     ?>
