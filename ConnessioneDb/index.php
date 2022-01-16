@@ -52,7 +52,6 @@
               unset($orderByNavigator['page']);
               $navOrderByQueryString = http_build_query($orderByNavigator, '&amp;');
 
-
               $totalUsers = countUsers($parms);
               $numPages = ceil($totalUsers/$recordsPerPage); //arrotondato per eccesso
               $users = getUsers($parms);
