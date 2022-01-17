@@ -1,4 +1,6 @@
 <?php
+  session_start();
+
   require_once 'function.php';
   require_once 'view\head.php';
 
@@ -22,32 +24,18 @@
     <main role="main" class="container">
        <h1 class="text-center">USER MANAGEMENT SYSTEM </h1>
        <hr>
+
        <?php
-          $parms = [
-            'orderby' => $orderby,
-            'orderDir' => $orderDir,
-            'recordsPerPage' => $recordsPerPage,
-            'search' => $search,
-            'page' => $page
-          ];
+          //Messaggio di conferma o errore della cancellazione dell'utente
+          if(!empty($_SESSION['message'])){
+            $alertType = $_SESSION['success']?'success':'alert';
+            $message = $_SESSION['message'];
+            require 'view/message.php';
 
-          $orderByParms = $orderByNavigator = $parms;
-          //Rimuovo la chiave 'order by' perchè viene assegnata nel titolo di ogni colonna
-          unset($orderByParms['orderby']);
-          //Rimuovo la chiave 'Orderdir' perchè al click sulla colonna ddevo poter cambiare ordinamento
-          unset($orderByParms['orderDir']);
-          //Unifico tutti i parm in una variabile e la inserisco nella userList
-          $orderByQueryString = http_build_query($orderByParms, '&amp;');
+            unset($_SESSION['message'],$_SESSION['success']);
+          }
 
-          //Rimuovo le pagine perchè già gestite
-          unset($orderByNavigator['page']);
-          $navOrderByQueryString = http_build_query($orderByNavigator, '&amp;');
-
-          $totalUsers = countUsers($parms);
-          $numPages = ceil($totalUsers/$recordsPerPage); //arrotondato per eccesso
-          $users = getUsers($parms);
-
-          require_once 'view/userList.php';
+          require_once 'controller/displayUsers.php'
 
         ?>
     </main>
