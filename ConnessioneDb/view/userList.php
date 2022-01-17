@@ -35,11 +35,11 @@
 
               <div class="col-4">
                 <a class="btn btn-danger" onclick="return confirm('Confermi di voler cancellare?')"
-                  href="<?=$urlUpdate?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=delete&id=<?=$user['UserID']?>">
+                  href="<?=$urlDelete?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=delete&id=<?=$user['UserID']?>">
                   <i class="fas fa-user-times"></i> Delete
                 </a>
               </div>
-              
+
             </div>
           </td>
         </tr>

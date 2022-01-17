@@ -1,21 +1,5 @@
 <?php
-  session_start();
-
-  require_once 'function.php';
-  require_once 'view\head.php';
-
-  $url = $_SERVER['PHP_SELF'];
-  $urlUpdate = 'controller/updateUser.php';
-
-  $orderDir = getParms('orderDir', 'ASC');
-  $orderby = getParms('orderby', 'UserID');
-  $orderByColumns = getConfig('orderByColumns', ['UserID', 'UserName', 'UserCodiceFiscale', 'UserEmail', 'UserEta']);
-  $recordsPerPage = getParms('recordsPerPage', getConfig('numberRecord'));
-  $recordPerPageOptions = getConfig('recordPerPageOptions', [5,10,20,30,50]);
-  $search = getParms('search','');
-  $page = getParms('page', 1);
-
-  require_once 'view\navbar.php';
+  require_once 'header.php'
 ?>
 
   <body>
