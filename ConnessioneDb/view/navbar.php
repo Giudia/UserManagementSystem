@@ -17,7 +17,7 @@
           $classActive = (stripos($url,'index') && !empty($_GET['action']) && $_GET['action'] === 'insert');
           $class = $classActive? 'active':'';
          ?>
-        <a class="nav-link <?= $class ?>" href="index.php?action=insert"><i class="fas fa-user-plus"></i> Add user</a>
+        <a class="nav-link <?= $class ?>" href="formUpdateUser.php?action=insert"><i class="fas fa-user-plus"></i> Add user</a>
 
         <form class="form-inline mt-2 mt-md-0 d-flex" action="<?=$url?>" name="formSearch" id="formSearch" method="get" >
 

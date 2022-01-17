@@ -2,7 +2,8 @@
   session_start();
 
   require_once 'function.php';
-  require_once 'view\head.php';
+  require_once 'model/user.php';
+  require_once 'view/head.php';
 
   $url = $_SERVER['PHP_SELF'];
   $urlUpdate = 'formUpdateUser.php';
