@@ -31,7 +31,7 @@
           <td><?= $user['UserEta'];?></td>
           <td>
             <div class="row">
-              <div class="col-4"><a class="btn btn-primary" href="<?=$urlUpdate?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=update&id=<?=$user['UserID']?>"><i class="fas fa-user-edit"></i> Update</a></div>
+              <div class="col-4"><a class="btn btn-primary" href="<?=$urlUpdate?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=store&id=<?=$user['UserID']?>"><i class="fas fa-user-edit"></i> Update</a></div>
 
               <div class="col-4">
                 <a class="btn btn-danger" onclick="return confirm('Confermi di voler cancellare?')"

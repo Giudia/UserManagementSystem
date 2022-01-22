@@ -34,5 +34,32 @@
     return $result;
   };
 
+  function storeUser(array $data, int $id){
+    //aggiornamento utente
+    /**
+     * @var $conn mysqli
+     */
+     $result = 0;
 
+    $conn = $GLOBALS['mysqli'];
+
+    $userName = $conn->escape_string($data['UserName']);
+    $UserEmail = $conn->escape_string($data['UserEmail']);
+    $userCodiceFiscale = $conn->escape_string($data['userCodiceFiscale']);
+    $UserEta = $conn->escape_string($data['UserEta']);
+
+    $sql ='UPDATE utenti SET ';
+    $sql .= "UserName='$userName', UserEmail='$UserEmail', UserCodiceFiscale='$userCodiceFiscale',";
+    $sql .= "UserEta=$UserEta";
+    $sql .= " WHERE UserID = $id";
+
+    $res = $conn->query($sql);
+
+    if($res){
+      $result = $conn->affected_rows;
+    }else {
+        $result = -1;
+    }
+    return $result;
+  };
 ?>
