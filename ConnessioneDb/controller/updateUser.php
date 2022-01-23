@@ -1,7 +1,8 @@
 <?php
 
   session_start();
-//si rompe in questo file
+
+printf('entro');
   require_once '../function.php';
   require_once '../model/user.php';
 
@@ -16,7 +17,7 @@
   switch ($action) {
     case 'delete':
       // Cancellazione utente
-
+printf('delete');
       $UserID = getParms('id', 0);
       $res = deleteUser($UserID);
 
@@ -27,6 +28,7 @@
 
       header('location:../index.php?'.$queryString);
       break;
+
     case 'save':
       break;
 

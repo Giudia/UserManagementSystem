@@ -33,14 +33,14 @@
 
   <div class="form-group row">
     <div class="col-auto">
-      <button class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare??')">
+      <a class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare?')">
         <i class="fas fa-user-times"></i> Cancella
-      </button>
+      </a>
     </div>
 
     <div class="col-auto">
       <button class="btn btn-success">
-        <i class="fas fa-user-times"></i>
+        <i class="fas fa-user-edit"></i>
         <?= $user['UserID']?'Aggiorna' : 'Inserisci'?>
       </button>
     </div>
