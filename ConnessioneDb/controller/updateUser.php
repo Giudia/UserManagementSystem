@@ -2,7 +2,6 @@
 
   session_start();
 
-printf('entro');
   require_once '../function.php';
   require_once '../model/user.php';
 
@@ -17,7 +16,7 @@ printf('entro');
   switch ($action) {
     case 'delete':
       // Cancellazione utente
-printf('delete');
+
       $UserID = getParms('id', 0);
       $res = deleteUser($UserID);
 
@@ -30,12 +29,22 @@ printf('delete');
       break;
 
     case 'save':
+      $data = $_POST;
+
+      $res = saveUser($data);
+
+      $message = $res ? 'Utente inserito' : 'Errore inserimento';
+
+      $_SESSION['message'] = $message;
+      $_SESSION['success'] = $res;
+
+      header('location:../index.php?'.$queryString);
+
       break;
 
     case 'store':
       $data = $_POST;
-      var_dump($data);
-      //$UserID = getParms('UserID',0);
+
       $res = storeUser($data, $data['UserID']);
 
       $message = $res ? 'Utente aggiornato' : 'Errore aggiornamento';

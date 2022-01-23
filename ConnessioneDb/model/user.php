@@ -62,4 +62,31 @@
     }
     return $result;
   };
+
+  function saveUser(array $data){
+    //aggiornamento utente
+    /**
+     * @var $conn mysqli
+     */
+    $result = 0;
+
+    $conn = $GLOBALS['mysqli'];
+
+    $userName = $conn->escape_string($data['UserName']);
+    $UserEmail = $conn->escape_string($data['UserEmail']);
+    $userCodiceFiscale = $conn->escape_string($data['userCodiceFiscale']);
+    $UserEta = (int)$data['UserEta'];
+
+    $sql ="INSERT INTO utenti (UserName, UserEmail, UserCodiceFiscale, UserEta)";
+    $sql .= " VALUE('$userName','$UserEmail','$userCodiceFiscale',$UserEta)";
+
+    $res = $conn->query($sql);
+
+    if($res){
+      $result = $conn->affected_rows;
+    }else {
+        $result = -1;
+    }
+    return $result;
+  };
 ?>
