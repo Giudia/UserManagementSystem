@@ -54,11 +54,17 @@
     $sql .= " WHERE UserID = $id";
 
     $res = $conn->query($sql);
+    $result = [
+      'success' => 1,
+      'affected_rows' => 0,
+      'error' =>'',
+    ];
 
     if($res){
-      $result = $conn->affected_rows;
+      $result['affected_rows'] = $conn->affected_rows;
     }else {
-        $result = -1;
+        $result['success'] = 0;
+        $result['error'] = $conn->error;
     }
     return $result;
   };

@@ -12,7 +12,7 @@
        <?php
           //Messaggio di conferma o errore della cancellazione dell'utente
           if(!empty($_SESSION['message'])){
-            $alertType = $_SESSION['success']?'success':'alert';
+            $alertType = $_SESSION['success']?'success':'danger';
             $message = $_SESSION['message'];
             require 'view/message.php';
 

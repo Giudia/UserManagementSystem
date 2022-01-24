@@ -32,11 +32,14 @@
   </div>
 
   <div class="form-group row">
-    <div class="col-auto">
-      <a class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare?')">
-        <i class="fas fa-user-times"></i> Cancella
-      </a>
-    </div>
+
+    <?php if ($user['UserID']): ?>
+      <div class="col-auto">
+        <a class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare?')" >
+          <i class="fas fa-user-times"></i> Cancella
+        </a>
+      </div>
+    <?php endif ?>
 
     <div class="col-auto">
       <button class="btn btn-success">

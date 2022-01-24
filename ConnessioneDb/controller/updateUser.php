@@ -47,7 +47,7 @@
 
       $res = storeUser($data, $data['UserID']);
 
-      $message = $res ? 'Utente aggiornato' : 'Errore aggiornamento';
+      $message = $res['success'] ? 'Utente aggiornato' : 'Errore aggiornamento: '.$res['error'];
 
       $_SESSION['message'] = $message;
       $_SESSION['success'] = $res;
