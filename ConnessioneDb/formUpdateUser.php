@@ -9,9 +9,12 @@
   <?php
     $id = getParms('id', 0);
     $action = getParms('action', '');
+
     $orderDir = getParms('orderDir', 'ASC');
+    $orderby = getParms('orderby');
     $search = getParms('search' ,'') ;
     $page = getParms('page',1);
+
     $parms = compact('orderby','orderDir','page','search','action');
     $defaultParms = http_build_query($parms, '','&amp;');
 

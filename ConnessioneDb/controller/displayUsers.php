@@ -17,7 +17,7 @@
   //Rimuovo la chiave 'Orderdir' perchè al click sulla colonna ddevo poter cambiare ordinamento
   unset($orderByParms['orderDir']);
   //Unifico tutti i parm in una variabile e la inserisco nella userList
-  $orderByQueryString = http_build_query($orderByParms, '&amp;');
+  $orderByQueryString = http_build_query($orderByParms,'', '&amp;');
 
   //Rimuovo le pagine perchè già gestite
   unset($orderByNavigator['page']);
@@ -29,5 +29,5 @@
   $users = getUsers($parms);
 
   require_once 'view/userList.php';
-  
+
  ?>
