@@ -31,6 +31,14 @@
     </div>
   </div>
 
+  <!-- per funzionare il form deve avere enctype = multipart-->
+  <div class="row mb-3">
+    <label for="UserAvatar" class="col-sm-2 col-form-label">Avatar</label>
+    <div class="col-sm-10">
+      <input type="file" accept="image/*" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
+    </div>
+  </div>
+
   <div class="form-group row">
 
     <?php if ($user['UserID']): ?>
