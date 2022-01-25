@@ -43,6 +43,7 @@
       break;
 
     case 'store':
+
       $data = $_POST;
 
       $res = storeUser($data, $data['UserID']);

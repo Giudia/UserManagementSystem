@@ -35,6 +35,7 @@
   <div class="row mb-3">
     <label for="UserAvatar" class="col-sm-2 col-form-label">Avatar</label>
     <div class="col-sm-10">
+      <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> <!--Regola la dimensione massima del file caricato. Va messo prima del campo file -->
       <input type="file" accept="image/*" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
     </div>
   </div>
