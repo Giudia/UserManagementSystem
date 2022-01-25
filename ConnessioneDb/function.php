@@ -164,4 +164,35 @@ function countUsers(array $parms = []){
 
   return $total;
 }
+
+  function copyAvatar(int $ID){
+    //salvo avatar utente
+
+    //Inizializzo l'arrey di ritorno
+    $result[
+      'success' => false,
+      'message' => ''
+    ];
+
+    //Verifico che sia stato caricato almeno 1 file
+    if (empty($_FILES)){
+      //Se non è stato caricato restituisco l'errore senza continuare
+      $result['message'] = 'Nessun file caricato';
+      return = $result;
+    };
+
+    //Verifico se il file è stato caricato dal browser
+    if(!is_uploaded_file($_FILES['avatar']['temp_name'])){
+      $result['message'] = 'Nessun file caricato da browser';
+      return = $result;
+    };
+
+    //Verifico il mimetype
+    $finfo = finfo_open(FILEINFO_MIME);
+    $info = info_file($finfo,$_FILES['avatar']['temp_name'])
+    if(stristr($info, 'image') === false){
+      $result['message'] = "Il file non è un'immagine";
+      return = $result;
+    }
+  }
 ?>

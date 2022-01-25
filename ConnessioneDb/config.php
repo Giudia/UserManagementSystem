@@ -4,7 +4,7 @@
 
 //Leggo dal file ini il valore (di solito molto alto)
 //Viene espresso in M o G, quindi va convertito in B
-$max_ini_file = ini_get('upload_max_filesize')
+$max_ini_file = ini_get('upload_max_filesize');
 $mega = 1024;
 $giga = $mega*1024;
 
@@ -32,7 +32,4 @@ $config = [
     //Leggo la dimensione massima impostata dal file INI
     'max_ini_file' => $max_ini_file,
   ];
-
-  const MAX_FILE_SIZE = 3000000; //3MB
-
 ?>
