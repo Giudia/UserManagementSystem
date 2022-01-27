@@ -3,7 +3,7 @@
 ?>
 
   <body>
-
+  
     <!-- Begin page content -->
     <main role="main" class="container">
        <h1 class="text-center">USER MANAGEMENT SYSTEM </h1>

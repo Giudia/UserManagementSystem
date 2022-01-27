@@ -1,5 +1,5 @@
 <?php //var_dump($defaultParms) ?>
-<form action="controller/updateUser.php?<?=$defaultParms?>" method="post">
+<form action="controller/updateUser.php?<?=$defaultParms?>" method="post" enctype="multipart/form-data">
   <!--passo in un campo nascosto l'id dell'utente e la action, necessari durante il salvataggio-->
   <input type="hidden" class="form-control col-form-label-lg" id="UserID" name="UserID" placeholder="ID" value="<?=$user['UserID']?>">
 
@@ -35,13 +35,17 @@
   <div class="row mb-3">
     <label for="UserAvatar" class="col-sm-2 col-form-label">Avatar</label>
     <div class="col-sm-10">
+<<<<<<< Updated upstream
       <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> <!--Regola la dimensione massima del file caricato. Va messo prima del campo file -->
       <input type="file" accept="image/*" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
+=======
+      <input type="hidden" name="MAX_FILE_SIZE" value="<?=getConfig('max_ini_file')?>"> <!--Regola la dimensione massima del file caricato. Va messo prima del campo file -->
+      <input type="file" accept="image/jpg" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
+>>>>>>> Stashed changes
     </div>
   </div>
 
   <div class="form-group row">
-
     <?php if ($user['UserID']): ?>
       <div class="col-auto">
         <a class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare?')" >

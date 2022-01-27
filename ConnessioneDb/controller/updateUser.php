@@ -45,10 +45,19 @@
     case 'store':
 
       $data = $_POST;
+      $resAvatar = copyAvatar($data['UserID']);
+      
+      //Se il salvataggio è andato a buon fine aggiungo il file al salvataggio dello user
+      if ($resAvatar['success']){
+        $data['UserAvatar'] = $resAvatar['file_name'];
+      }else{
+        $data['UserAvatar'] = null;
+      };
 
       $res = storeUser($data, $data['UserID']);
 
       $message = $res['success'] ? 'Utente aggiornato' : 'Errore aggiornamento: '.$res['error'];
+      $message .= $resAvatar['success'] ? ' Avatar aggiunto' : ' Errore avatar: '.$resAvatar['message'];
 
       $_SESSION['message'] = $message;
       $_SESSION['success'] = $res;

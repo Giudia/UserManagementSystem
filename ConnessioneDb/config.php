@@ -33,6 +33,11 @@ $config = [
     'max_ini_file' => $max_ini_file,
   ];
 
+<<<<<<< Updated upstream
   const MAX_FILE_SIZE = 3000000; //3MB
 
+=======
+  //costante per la directory dei file avatar
+  if (!defined('AVATAR_DIR')) define('AVATAR_DIR', $_SERVER['DOCUMENT_ROOT'].'/avatar/');
+>>>>>>> Stashed changes
 ?>

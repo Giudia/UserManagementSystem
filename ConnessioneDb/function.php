@@ -164,4 +164,63 @@ function countUsers(array $parms = []){
 
   return $total;
 }
+<<<<<<< Updated upstream
+=======
+
+  function copyAvatar(int $ID){
+    //salvo avatar utente
+    
+    //Inizializzo l'array di ritorno
+    $result = [
+      'success' => false,
+      'message' => '',
+      'file_name' => '',
+    ];
+
+    //Verifico che sia stato caricato almeno 1 file
+    if (empty($_FILES)){
+      //Se non è stato caricato restituisco l'errore senza continuare
+      $result['message'] = 'Nessun file caricato';
+      return $result;
+    };
+
+    //Verifico se il file è stato caricato dal browser
+    if(!is_uploaded_file($_FILES['UserAvatar']['tmp_name'])){
+      $result['message'] = 'Nessun file caricato da browser';
+      return $result;
+    };
+
+    //Verifico il mimetype
+    $finfo = finfo_open(FILEINFO_MIME);
+    $info = finfo_file($finfo,$_FILES['UserAvatar']['tmp_name']);
+    if(stristr($info, 'image') === false){
+      $result['message'] = "Il file non è un'immagine";
+      return $result;
+    }
+
+    //Verifico la grandezza del file
+  if ($_FILES['UserAvatar']['size'] > getConfig('max_ini_file', 0)){
+    $result['message'] = "Il file supera la granzezza massima consentita";
+    return $result;
+  }
+
+  // Se supero tutti i controlli copio il file
+  $filename = $ID.'_'.str_replace(' ', '', microtime()).'.jpg';
+  if(is_uploaded_file($_FILES['UserAvatar']['tmp_name'])){
+    if(! move_uploaded_file($_FILES['UserAvatar']['tmp_name'], AVATAR_DIR.$filename)){
+      //Se non va a buon fine la copia restituisco l'errore
+      $result['message'] = 'Errore durante il caricamento del file';
+      return $result;
+    }
+  } else{
+    $result['message'] = 'Nessun file caricato';
+    return $result;
+  }
+  //Se non ci sono stati errori, aggiungo il nome del file all'array
+  $result['file_name'] = $filename;
+  $result['success'] = true;
+  return $result;
+
+  }
+>>>>>>> Stashed changes
 ?>
