@@ -32,7 +32,8 @@ $config = [
     //Leggo la dimensione massima impostata dal file INI
     'max_ini_file' => $max_ini_file,
     'avatar_dir' => $_SERVER['DOCUMENT_ROOT'].'/avatar/',
-    'thumbnail_widht' => 100,
+    'web_avatar_dir' => '/avatar/',
+    'thumbnail_width' => 100,
   ];
 
 ?>

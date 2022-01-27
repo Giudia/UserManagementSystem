@@ -40,7 +40,22 @@
     </div>
   </div>
 
-  <div class="form-group row">
+   <!-- se l'utente ha già impostato un'immagine la visualizzo-->
+   <div class="form-group" >
+    <?php
+      //Controllo, se non esiste carico un place holder genererico
+      $avatar_dir = getConfig('avatar_dir');
+      $web_avatar_dir = getConfig('web_avatar_dir');
+      
+      $avatarImg = file_exists($avatar_dir.$user['UserAvatar']) ?  $web_avatar_dir.$user['UserAvatar'] : $web_avatar_dir.'placeholder.png';
+
+      $thumbWidth = getConfig('thumbnail_width');
+    ?>
+    <img class="col-md-2 offset-md-2 mb-3" src="<?=$avatarImg?>" alt="Avatar" width="<?=$thumbWidth?>">
+  </div>
+
+
+  <div class="form-group row offset-md-2">
     <?php if ($user['UserID']): ?>
       <div class="col-auto">
         <a class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare?')" >
@@ -49,7 +64,7 @@
       </div>
     <?php endif ?>
 
-    <div class="col-auto">
+    <div class="col-auto ">
       <button class="btn btn-success">
         <i class="fas fa-user-edit"></i>
         <?= $user['UserID']?'Aggiorna' : 'Inserisci'?>

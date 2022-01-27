@@ -5,7 +5,7 @@
   <body>
   
     <!-- Begin page content -->
-    <main role="main" class="container">
+    <main role="main" class="container-fluid">
        <h1 class="text-center">USER MANAGEMENT SYSTEM </h1>
        <hr>
 

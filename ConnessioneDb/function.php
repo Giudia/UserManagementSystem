@@ -230,7 +230,7 @@ function countUsers(array $parms = []){
   }
 
   //Ridimensiono l'immagine definendo la larghezza 
-  $thumbnail = imagescale($NewImg, getConfig('thumbnail_widht', 100));
+  $thumbnail = imagescale($NewImg, getConfig('thumbnail_width', 100));
   if ($thumbnail){
     //se la risorsa è stata creata la salvo
     imagejpeg($thumbnail, 'thumb_'.$filename);

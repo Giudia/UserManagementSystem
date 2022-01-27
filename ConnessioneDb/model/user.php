@@ -47,7 +47,7 @@
     $UserEmail = $conn->escape_string($data['UserEmail']);
     $userCodiceFiscale = $conn->escape_string($data['userCodiceFiscale']);
     $UserEta = $conn->escape_string($data['UserEta']);
-    $UserAvatar = $conn->escape_string($data['UserAvatar']);
+    $UserAvatar = ($conn->escape_string($data['UserAvatar'])) ? $conn->escape_string($data['UserAvatar']): 'NULL' ;
 
     $sql ='UPDATE utenti SET ';
     $sql .= "UserName='$userName', UserEmail='$UserEmail', UserCodiceFiscale='$userCodiceFiscale',";
