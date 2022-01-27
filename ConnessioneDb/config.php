@@ -4,7 +4,7 @@
 
 //Leggo dal file ini il valore (di solito molto alto)
 //Viene espresso in M o G, quindi va convertito in B
-$max_ini_file = ini_get('upload_max_filesize')
+$max_ini_file = ini_get('upload_max_filesize');
 $mega = 1024;
 $giga = $mega*1024;
 
@@ -31,13 +31,8 @@ $config = [
     'numLinkNavigator'=> 5,
     //Leggo la dimensione massima impostata dal file INI
     'max_ini_file' => $max_ini_file,
+    'avatar_dir' => $_SERVER['DOCUMENT_ROOT'].'/avatar/',
+    'thumbnail_widht' => 100,
   ];
 
-<<<<<<< Updated upstream
-  const MAX_FILE_SIZE = 3000000; //3MB
-
-=======
-  //costante per la directory dei file avatar
-  if (!defined('AVATAR_DIR')) define('AVATAR_DIR', $_SERVER['DOCUMENT_ROOT'].'/avatar/');
->>>>>>> Stashed changes
 ?>

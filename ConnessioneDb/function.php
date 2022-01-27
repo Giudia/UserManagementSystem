@@ -164,8 +164,6 @@ function countUsers(array $parms = []){
 
   return $total;
 }
-<<<<<<< Updated upstream
-=======
 
   function copyAvatar(int $ID){
     //salvo avatar utente
@@ -193,6 +191,7 @@ function countUsers(array $parms = []){
     //Verifico il mimetype
     $finfo = finfo_open(FILEINFO_MIME);
     $info = finfo_file($finfo,$_FILES['UserAvatar']['tmp_name']);
+
     if(stristr($info, 'image') === false){
       $result['message'] = "Il file non è un'immagine";
       return $result;
@@ -205,22 +204,45 @@ function countUsers(array $parms = []){
   }
 
   // Se supero tutti i controlli copio il file
-  $filename = $ID.'_'.str_replace(' ', '', microtime()).'.jpg';
+  $filename = $ID.'_'.str_replace('.', '', microtime(true)).'jpg';
   if(is_uploaded_file($_FILES['UserAvatar']['tmp_name'])){
-    if(! move_uploaded_file($_FILES['UserAvatar']['tmp_name'], AVATAR_DIR.$filename)){
+    
+    $avatar_dir = getConfig('avatar_dir','');
+
+    if(! move_uploaded_file($_FILES['UserAvatar']['tmp_name'],$avatar_dir.$filename)){
       //Se non va a buon fine la copia restituisco l'errore
       $result['message'] = 'Errore durante il caricamento del file';
       return $result;
     }
+
   } else{
+
     $result['message'] = 'Nessun file caricato';
     return $result;
+
   }
+
+  //creazione thumbnail
+  //Creo una seconda immagine uguale alla prima
+  $NewImg = imagecreatefromjpeg($avatar_dir.$filename);
+  if (!$NewImg){
+    $result['message'] = 'Errore copia img';
+  }
+
+  //Ridimensiono l'immagine definendo la larghezza 
+  $thumbnail = imagescale($NewImg, getConfig('thumbnail_widht', 100));
+  if ($thumbnail){
+    //se la risorsa è stata creata la salvo
+    imagejpeg($thumbnail, 'thumb_'.$filename);
+  }else{
+    //se non è stata creata
+    $result['message'] = 'Errore creazione thumbnail';  
+  }
+
   //Se non ci sono stati errori, aggiungo il nome del file all'array
   $result['file_name'] = $filename;
   $result['success'] = true;
   return $result;
 
   }
->>>>>>> Stashed changes
 ?>

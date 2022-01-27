@@ -46,7 +46,8 @@
 
       $data = $_POST;
       $resAvatar = copyAvatar($data['UserID']);
-      
+      var_dump($resAvatar );
+      die;
       //Se il salvataggio è andato a buon fine aggiungo il file al salvataggio dello user
       if ($resAvatar['success']){
         $data['UserAvatar'] = $resAvatar['file_name'];
