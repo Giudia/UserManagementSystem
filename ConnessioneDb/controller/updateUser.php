@@ -18,7 +18,13 @@
       // Cancellazione utente
 
       $UserID = getParms('id', 0);
+      $UserData = getUser($UserID);
       $res = deleteUser($UserID);
+
+      //dopo aver cancellato l'utente cancello l'immagine
+      if ($res){
+        RemoveOldAvatar($UserID, $UserData);
+      }
 
       $message = $res ? 'Utente cancellato' : 'Errore nella cancellazione';
 
@@ -29,11 +35,25 @@
       break;
 
     case 'save':
-      $data = $_POST;
 
+      $data = $_POST;
       $res = saveUser($data);
 
-      $message = $res ? 'Utente inserito' : 'Errore inserimento';
+      if ($res['UserID'] > 0){
+
+        $message = 'Utente inserito';
+
+        $resAvatar = copyAvatar($res['UserID']);
+
+        if ($resAvatar['success']){
+          UpdateUserAvatar($res['UserID'], $resAvatar['file_name']);
+        }
+
+      } else {
+
+        $message ='Errore inserimento';
+
+      };
 
       $_SESSION['message'] = $message;
       $_SESSION['success'] = $res;
@@ -45,16 +65,19 @@
     case 'store':
 
       $data = $_POST;
-      $resAvatar = copyAvatar($data['UserID']);
+      $UserID = $data['UserID'];
+      $resAvatar = copyAvatar($UserID);
 
       //Se il salvataggio è andato a buon fine aggiungo il file al salvataggio dello user
       if ($resAvatar['success']){
+        //Se esiste già un avatar lo vado a rimuovere prima di salvare il nuovo
+        RemoveOldAvatar($UserID);
         $data['UserAvatar'] = $resAvatar['file_name'];
       }else{
         $data['UserAvatar'] = null;
       };
 
-      $res = storeUser($data, $data['UserID']);
+      $res = storeUser($data, $UserID);
 
       $message = $res['success'] ? 'Utente aggiornato' : 'Errore aggiornamento: '.$res['error'];
       $message .= $resAvatar['success'] ? ' Avatar aggiunto' : ' Errore avatar: '.$resAvatar['message'];

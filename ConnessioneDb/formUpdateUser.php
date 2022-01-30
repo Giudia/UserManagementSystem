@@ -27,6 +27,7 @@
         'UserEmail' =>'',
         'UserCodiceFiscale' =>'',
         'UserEta' => '',
+        'UserAvatar' => ''
       ];
     };
 

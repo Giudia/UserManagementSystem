@@ -36,7 +36,7 @@
     <label for="UserAvatar" class="col-sm-2 col-form-label">Avatar</label>
     <div class="col-sm-10">
       <input type="hidden" name="MAX_FILE_SIZE" value="<?=getConfig('max_ini_file')?>"> <!--Regola la dimensione massima del file caricato. Va messo prima del campo file -->
-      <input type="file" accept="image/jpg" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
+      <input onchange="previewFile()" type="file" accept="image/jpg" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
     </div>
   </div>
 
@@ -46,9 +46,9 @@
       //Controllo, se non esiste carico un place holder genererico
       $avatar_dir = getConfig('avatar_dir');
       $web_avatar_dir = getConfig('web_avatar_dir');
-      
-      $avatarImg = file_exists($avatar_dir.$user['UserAvatar']) ?  $web_avatar_dir.$user['UserAvatar'] : $web_avatar_dir.'placeholder.png';
 
+      //Perchè se faccio il controllo sull'immagine not thumb non funziona in inserimento nuovo utente?
+      $avatarImg = file_exists($avatar_dir.'thumb_'.$user['UserAvatar']) ?  $web_avatar_dir.$user['UserAvatar'] : $web_avatar_dir.'placeholder.png';
       $thumbWidth = getConfig('thumbnail_width');
     ?>
     <img class="col-md-2 offset-md-2 mb-3" src="<?=$avatarImg?>" alt="Avatar" width="<?=$thumbWidth?>">

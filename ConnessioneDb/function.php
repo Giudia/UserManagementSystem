@@ -111,8 +111,6 @@ function getUsers( array $parms = []){
     while($row = $result->fetch_assoc()){
       $users[] = $row;
     }
-  }else{
-    die($conn->error);
   };
 
   return $users;
@@ -204,7 +202,7 @@ function countUsers(array $parms = []){
   }
 
   // Se supero tutti i controlli copio il file
-  $filename = $ID.'_'.str_replace('.', '', microtime(true)).'jpg';
+  $filename = $ID.'_'.str_replace('.', '', microtime(true)).'.jpg';
   if(is_uploaded_file($_FILES['UserAvatar']['tmp_name'])){
     
     $avatar_dir = getConfig('avatar_dir','');
@@ -224,7 +222,7 @@ function countUsers(array $parms = []){
 
   //creazione thumbnail
   //Creo una seconda immagine uguale alla prima
-  $NewImg = imagecreatefromjpeg($avatar_dir.$filename);
+  $NewImg = imagecreatefromjpeg( $avatar_dir.$filename);
   if (!$NewImg){
     $result['message'] = 'Errore copia img';
   }
@@ -233,7 +231,7 @@ function countUsers(array $parms = []){
   $thumbnail = imagescale($NewImg, getConfig('thumbnail_width', 100));
   if ($thumbnail){
     //se la risorsa è stata creata la salvo
-    imagejpeg($thumbnail, 'thumb_'.$filename);
+    imagejpeg($thumbnail, getConfig('avatar_dir').'thumb_'.$filename);
   }else{
     //se non è stata creata
     $result['message'] = 'Errore creazione thumbnail';  
@@ -245,4 +243,25 @@ function countUsers(array $parms = []){
   return $result;
 
   }
-?>
+
+  function RemoveOldAvatar(int $UserId, array $UserData = null) {
+
+    $UserData = ($UserData) ? : getUser($UserId);
+    $file = $UserData['UserAvatar'];
+    $folder = getConfig('avatar_dir');
+
+    if (!$UserData || !$file){
+      //Se non trova dati ritorno
+      return;
+    }
+
+    if (file_exists($folder.$file)){
+      //elimino fisicamente il file
+      unlink($folder.$file);
+    }
+
+    if (file_exists($folder.'thumb_'.$file)){
+      unlink($folder.'thumb_'.$file);
+    }
+
+  }

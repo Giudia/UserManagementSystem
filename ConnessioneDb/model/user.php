@@ -75,8 +75,10 @@
     /**
      * @var $conn mysqli
      */
-    $result = 0;
-
+    $result['success'] = 0;
+    $result['error'] = 'Nessun utente';
+    $result['message'] = '';
+    
     $conn = $GLOBALS['mysqli'];
 
     $userName = $conn->escape_string($data['UserName']);
@@ -90,10 +92,35 @@
     $res = $conn->query($sql);
 
     if($res){
-      $result = $conn->affected_rows;
+      $result['UserID'] = $conn->insert_id;
+      $result['success'] = true;
     }else {
-        $result = -1;
+      $result['success'] = false;
+      $result['message'] = $conn->error;
     }
     return $result;
   };
+
+  
+function UpdateUserAvatar(int $UserId, string $UserAvatar = null ) {
+
+  if (! $UserAvatar){
+    $result['success'] = 0;
+    $result['error'] = 'Nessun avatar';
+    return;
+  };
+  
+  $conn = $GLOBALS['mysqli'];
+  $UserAvatar = $conn->escape_string($UserAvatar);
+
+  $sql ='UPDATE utenti SET ';
+  $sql .= "UserAvatar = '$UserAvatar' ";
+  $sql .= "WHERE UserID = $UserId";
+
+  $res = $conn->query($sql);
+
+  return $res && $conn->affected_rows;
+
+};
+
 ?>
