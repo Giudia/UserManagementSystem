@@ -27,14 +27,38 @@
 
       foreach($users as $user){?>
 
-        <?php $avatarImg = file_exists($avatar_dir.$user['UserAvatar']) ?  $web_avatar_dir.$user['UserAvatar'] : $web_avatar_dir.'placeholder.png'; ?>
+        <?php 
+
+          //Per ogni user controllo se esiste un avatar, se ha una thumbnail e se ha una preview
+          $avatarThumbImg = $user['UserAvatar'] && file_exists($avatar_dir.'thumb_'.$user['UserAvatar']) ?  $web_avatar_dir.'thumb_'.$user['UserAvatar'] : $web_avatar_dir.'placeholder.png'; 
+          $avatarPreviewImg = $user['UserAvatar'] && file_exists($avatar_dir.'prev_'.$user['UserAvatar']) ?  $web_avatar_dir.'prev_'.$user['UserAvatar'] : '';
+          $avatarImg = $user['UserAvatar'] && file_exists($avatar_dir.$user['UserAvatar']) ?  $web_avatar_dir.$user['UserAvatar'] : ''; 
+          
+        ?>
 
 
         <tr>
           <!--Nomi dei campi a db-->
           <!-- ATTENZIONE!! CASE SENSITIVE!!!-->
           <td><?= $user['UserID'];?></td>
-        <td><img src="<?=$avatarImg?>" width="<?=getConfig('thumbnail_width')?>" alt=""></td>
+
+          <td>
+            <?php if($avatarImg) : ?>
+              <a href="<?=$avatarImg?>" target="_blank" class="thumbnail">
+                <img src="<?=$avatarThumbImg?>" class="avatar" width="<?=getConfig('thumbnail_width')?>" alt="">
+
+                  <?php if($avatarPreviewImg):?>
+                    <span>
+                      <img src="<?=$avatarPreviewImg?>" class="avatar" alt="">
+                    </span>
+                  <?php endif?>
+
+              </a>
+            <?php else :?>
+              <img src="<?=$avatarThumbImg?>" class="avatar" width="<?=getConfig('thumbnail_width')?>" alt="">
+            <?php endif?>
+          </td>
+
           <td><?= $user['UserName'];?></td>
           <td><?= $user['UserCodiceFiscale'];?></td>
           <td><a href="mailto:<?= $user['UserEmail'] ?>"><?= $user['UserEmail'];?></a></td>

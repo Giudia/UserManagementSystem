@@ -181,6 +181,9 @@ function countUsers(array $parms = []){
     };
 
     //Verifico se il file è stato caricato dal browser
+    //var_dump($_FILES['UserAvatar']);
+    //die;
+
     if(!is_uploaded_file($_FILES['UserAvatar']['tmp_name'])){
       $result['message'] = 'Nessun file caricato da browser';
       return $result;
@@ -229,12 +232,25 @@ function countUsers(array $parms = []){
 
   //Ridimensiono l'immagine definendo la larghezza 
   $thumbnail = imagescale($NewImg, getConfig('thumbnail_width', 100));
+
+
   if ($thumbnail){
     //se la risorsa è stata creata la salvo
     imagejpeg($thumbnail, getConfig('avatar_dir').'thumb_'.$filename);
   }else{
     //se non è stata creata
     $result['message'] = 'Errore creazione thumbnail';  
+  }
+
+  //Creo una terza immagine per l'anteprima
+  $preview = imagescale($NewImg, getConfig('preview_width', 400));
+
+  if ($preview){
+    //se la risorsa è stata creata la salvo
+    imagejpeg($preview, getConfig('avatar_dir').'prev_'.$filename);
+  }else{
+    //se non è stata creata
+    $result['message'] = 'Errore creazione preview';  
   }
 
   //Se non ci sono stati errori, aggiungo il nome del file all'array

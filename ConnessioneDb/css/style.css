@@ -52,3 +52,33 @@ code {
 .table thead th.DESC:after{
   content: '↓';
 }
+
+/* stile immagini thumbnai e preview*/
+
+.avatar{
+  border-radius: 6px;
+}
+
+.thumbnail{
+  position: relative;
+}
+.thumbnail span{
+  position: absolute;
+  padding: 5px;
+  left: 0px;
+  visibility: hidden;
+}
+
+.thumbnail span img{ /*CSS for enlarged image*/
+  padding: 2px;
+}
+
+.thumbnail:hover span{ /*CSS for enlarged image on hover*/
+  visibility: visible;
+  height:40vh ;
+  left: 20vw;
+  top: -20vh;
+  
+  /*position where enlarged image should offset horizontally */
+
+}

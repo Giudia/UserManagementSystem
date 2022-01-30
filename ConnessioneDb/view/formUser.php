@@ -51,7 +51,7 @@
       $avatarImg = file_exists($avatar_dir.'thumb_'.$user['UserAvatar']) ?  $web_avatar_dir.$user['UserAvatar'] : $web_avatar_dir.'placeholder.png';
       $thumbWidth = getConfig('thumbnail_width');
     ?>
-    <img class="col-md-2 offset-md-2 mb-3" src="<?=$avatarImg?>" alt="Avatar" width="<?=$thumbWidth?>">
+    <img class="col-md-2 offset-md-2 mb-3 avatar" src="<?=$avatarImg?>" alt="Avatar" width="<?=$thumbWidth?>">
   </div>
 
 

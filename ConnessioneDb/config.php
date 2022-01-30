@@ -33,7 +33,8 @@ $config = [
     'max_ini_file' => $max_ini_file,
     'avatar_dir' => $_SERVER['DOCUMENT_ROOT'].'/avatar/',
     'web_avatar_dir' => '/avatar/',
-    'thumbnail_width' => 100,
+    'thumbnail_width' => 200,
+    'preview_width' => 600,
   ];
 
 ?>
