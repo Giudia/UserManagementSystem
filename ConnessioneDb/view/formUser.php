@@ -17,6 +17,32 @@
     </div>
   </div>
 
+  <div class="row mb-3">
+    <label for="UserPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control col-form-label-lg" id="UserPassword" name="UserPassword" placeholder="Password" value="" required>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="UserRoleType" class="col-sm-2 col-form-label">Ruolo</label>
+    <div class="col-sm-10">
+      <select name="UserRoleType" id="UserRoleType" class="form-control col-form-label-lg" >
+        
+        <?php 
+          $UserRoleType = getConfig('UserRoleType', []);
+          foreach( $UserRoleType as $role ) : 
+          $sel = ($user['UserRoleType'] === $role)? 'selected' : ''; ?>
+            
+            <option value="<?=$role?>" <?=$sel?>> <?=$role?> </option>
+
+        <?php endforeach?>
+
+      </select>
+
+    </div>
+  </div>
+  
     <div class="row mb-3">
       <label for="userCodiceFiscale" class="col-sm-2 col-form-label">CodiceFiscale</label>
       <div class="col-sm-10">
@@ -27,7 +53,7 @@
   <div class="row mb-3">
     <label for="UserEta" class="col-sm-2 col-form-label">Età</label>
     <div class="col-sm-10">
-      <input type="number" min="0" max"120" class="form-control col-form-label-lg" id="UserEta" name="UserEta" value="<?=$user['UserEta']?>" required>
+      <input type="number" min="0" max="120" class="form-control col-form-label-lg" id="UserEta" name="UserEta" value="<?=$user['UserEta']?>" required>
     </div>
   </div>
 

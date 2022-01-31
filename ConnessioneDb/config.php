@@ -5,7 +5,7 @@
 //Leggo dal file ini il valore (di solito molto alto)
 //Viene espresso in M o G, quindi va convertito in B
 $max_ini_file = ini_get('upload_max_filesize');
-$mega = 1024;
+$mega = 1024*1024;
 $giga = $mega*1024;
 
 //Cerco se nel testo è presente G o M
@@ -35,6 +35,8 @@ $config = [
     'web_avatar_dir' => '/avatar/',
     'thumbnail_width' => 200,
     'preview_width' => 600,
+
+    'UserRoleType'=> ['user', 'editor','admin'],
   ];
 
 ?>
