@@ -27,11 +27,12 @@
         'UserEmail' =>'',
         'UserCodiceFiscale' =>'',
         'UserEta' => '',
-        'UserAvatar' => ''
+        'UserAvatar' => '',
+        'UserPassword' => '',
+        'UserRoleType' => 'user',
       ];
     };
 
-    //var_dump($user);
     require_once 'view/formUser.php';
   ?>
 </main>

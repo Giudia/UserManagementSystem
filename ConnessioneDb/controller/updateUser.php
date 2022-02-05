@@ -6,7 +6,6 @@
   require_once '../model/user.php';
 
   $action = getParms('action', null);
-  var_dump($action);
 
   $parms = $_GET;
   unset($parms['action']);
@@ -80,7 +79,7 @@
       $res = storeUser($data, $UserID);
 
       $message = $res['success'] ? 'Utente aggiornato' : 'Errore aggiornamento: '.$res['error'];
-      $message .= $resAvatar['success'] ? ' Avatar aggiunto' : ' Errore avatar: '.$resAvatar['message'];
+      //$message .= $resAvatar['success'] ? ' Avatar aggiunto' : ' Errore avatar: '.$resAvatar['message'];
 
       $_SESSION['message'] = $message;
       $_SESSION['success'] = $res;

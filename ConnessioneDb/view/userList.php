@@ -13,6 +13,7 @@
       <th class="<?= ($orderby=='UserCodiceFiscale')?$orderDir:'' ?>"><a href="<?=$url?>?<?=$orderByQueryString?>&orderDir=<?=$orderDir?>&orderby=UserCodiceFiscale">Codice Fiscale</th>
       <th class="<?= ($orderby=='UserEmail')?$orderDir:'' ?>"><a href="<?=$url?>?<?=$orderByQueryString?>&orderDir=<?=$orderDir?>&orderby=UserEmail">Email</th>
       <th class="<?= ($orderby=='UserEta')?$orderDir:'' ?>"><a href="<?=$url?>?<?=$orderByQueryString?>&orderDir=<?=$orderDir?>&orderby=UserEta">Età</th>
+      <th>Ruolo</th>
       <th></th>
       <th></th>
     </tr>
@@ -63,6 +64,7 @@
           <td><?= $user['UserCodiceFiscale'];?></td>
           <td><a href="mailto:<?= $user['UserEmail'] ?>"><?= $user['UserEmail'];?></a></td>
           <td><?= $user['UserEta'];?></td>
+          <td><?= $user['UserRoleType'];?></td>
           <td>
             <div class="row">
               <div class="col-4"><a class="btn btn-primary" href="<?=$urlUpdate?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=store&id=<?=$user['UserID']?>"><i class="fas fa-user-edit"></i> Update</a></div>

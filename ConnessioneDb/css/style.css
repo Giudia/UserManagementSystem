@@ -82,3 +82,10 @@ code {
   /*position where enlarged image should offset horizontally */
 
 }
+
+.loginForm{
+  width: 60vw;
+  padding: 20px;
+  margin: 0 auto;
+  border: #000 solid 1px;
+}

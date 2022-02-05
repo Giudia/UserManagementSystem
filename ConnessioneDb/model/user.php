@@ -16,7 +16,7 @@
   };
 
   function getUser(int $id){
-    //cancellazione utente
+
     /**
      * @var $conn mysqli
      */
@@ -34,12 +34,46 @@
     return $result;
   };
 
+  
+  function getUser_byEmail( string $UserEmail){
+
+    /**
+     * @var $conn mysqli
+     */
+     $result = [];
+
+    $conn = $GLOBALS['mysqli'];
+
+    $UserEmail = filter_var($UserEmail, FILTER_VALIDATE_EMAIL);
+
+    if (!$UserEmail){
+      return;
+    }
+
+    $UserEmail = mysqli_escape_string($conn, $UserEmail);
+
+    $sql ="SELECT * FROM utenti WHERE UserEmail = '$UserEmail'";
+
+    $res = $conn->query($sql);
+
+    if($res && $res->num_rows){
+      $result = $res->fetch_assoc();
+    }
+
+    return $result;
+  };
+
+
   function storeUser(array $data, int $id){
     //aggiornamento utente
     /**
      * @var $conn mysqli
      */
-     $result = 0;
+    $result = [
+      'success' => 1,
+      'affectedRows' => 0,
+      'error' => ''
+    ];
 
     $conn = $GLOBALS['mysqli'];
 
@@ -47,22 +81,34 @@
     $UserEmail = $conn->escape_string($data['UserEmail']);
     $userCodiceFiscale = $conn->escape_string($data['userCodiceFiscale']);
     $UserEta = $conn->escape_string($data['UserEta']);
-    $UserAvatar = ($conn->escape_string($data['UserAvatar'])) ? $conn->escape_string($data['UserAvatar']): 'NULL' ;
+    $UserAvatar = $conn->escape_string($data['UserAvatar']);
 
     $sql ='UPDATE utenti SET ';
     $sql .= "UserName='$userName', UserEmail='$UserEmail', UserCodiceFiscale='$userCodiceFiscale',";
-    $sql .= "UserEta=$UserEta, UserAvatar = '$UserAvatar' ";
+    $sql .= "UserEta=$UserEta ";
+
+    if ($data['UserAvatar']){
+      $sql .= ", UserAvatar = '$UserAvatar' ";
+    }
+
+    if ($data['UserPassword']){ //modifico i dati solo se l'utente li ha cambiati
+      $data['UserPassword'] = $data['UserPassword'] ?? 'password';
+      $UserPassword = password_hash($data['UserPassword'], PASSWORD_DEFAULT);
+      $sql .= ", UserPassword = '$UserPassword'";
+    }
+
+    if ($data['UserRoleType']){ //modifico i dati solo se l'utente li ha cambiati
+     $UserRoleType = (in_array($data['UserRoleType'], getConfig('UserRoleType', [])) ? $data['UserRoleType'] : 'user');
+     $sql .= ", UserRoleType = '$UserRoleType'";  
+    }
+
     $sql .= " WHERE UserID = $id";
-
+    
     $res = $conn->query($sql);
-    $result = [
-      'success' => 1,
-      'affected_rows' => 0,
-      'error' =>'',
-    ];
-
+    
     if($res){
       $result['affected_rows'] = $conn->affected_rows;
+      $result['success'] = 1;
     }else {
         $result['success'] = 0;
         $result['error'] = $conn->error;
@@ -85,9 +131,12 @@
     $UserEmail = $conn->escape_string($data['UserEmail']);
     $userCodiceFiscale = $conn->escape_string($data['userCodiceFiscale']);
     $UserEta = (int)$data['UserEta'];
+    $data['UserPassword'] = $data['UserPassword'] ?? 'password'; //se l'utente non inserisce una password prende quella di default
+    $UserPassword = password_hash($data['UserPassword'], PASSWORD_DEFAULT);
+    $UserRoleType = in_array($data['UserRoleType'], getConfig('UserRoleType', []) ? $data['UserRoleType'] : 'user');
 
-    $sql ="INSERT INTO utenti (UserName, UserEmail, UserCodiceFiscale, UserEta)";
-    $sql .= " VALUE('$userName','$UserEmail','$userCodiceFiscale',$UserEta)";
+    $sql ="INSERT INTO utenti (UserName, UserEmail, UserCodiceFiscale, UserEta, UserPassword, UserRoleType)";
+    $sql .= " VALUE('$userName','$UserEmail','$userCodiceFiscale',$UserEta, $UserPassword, $UserRoleType)";
 
     $res = $conn->query($sql);
 

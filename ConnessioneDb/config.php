@@ -36,7 +36,7 @@ $config = [
     'thumbnail_width' => 200,
     'preview_width' => 600,
 
-    'UserRoleType'=> ['user', 'editor','admin'],
+    'UserRoleType'=> ['User', 'Editor','Admin'],
   ];
 
 ?>

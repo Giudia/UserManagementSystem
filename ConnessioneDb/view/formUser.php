@@ -1,4 +1,4 @@
-<?php //var_dump($defaultParms) ?>
+
 <form action="controller/updateUser.php?<?=$defaultParms?>" method="post" enctype="multipart/form-data">
   <!--passo in un campo nascosto l'id dell'utente e la action, necessari durante il salvataggio-->
   <input type="hidden" class="form-control col-form-label-lg" id="UserID" name="UserID" placeholder="ID" value="<?=$user['UserID']?>">
@@ -20,7 +20,7 @@
   <div class="row mb-3">
     <label for="UserPassword" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control col-form-label-lg" id="UserPassword" name="UserPassword" placeholder="Password" value="" required>
+      <input type="password" class="form-control col-form-label-lg" id="UserPassword" name="UserPassword" placeholder="Password" value="">
     </div>
   </div>
 
@@ -28,7 +28,7 @@
     <label for="UserRoleType" class="col-sm-2 col-form-label">Ruolo</label>
     <div class="col-sm-10">
       <select name="UserRoleType" id="UserRoleType" class="form-control col-form-label-lg" >
-        
+       
         <?php 
           $UserRoleType = getConfig('UserRoleType', []);
           foreach( $UserRoleType as $role ) : 
@@ -62,7 +62,7 @@
     <label for="UserAvatar" class="col-sm-2 col-form-label">Avatar</label>
     <div class="col-sm-10">
       <input type="hidden" name="MAX_FILE_SIZE" value="<?=getConfig('max_ini_file')?>"> <!--Regola la dimensione massima del file caricato. Va messo prima del campo file -->
-      <input onchange="previewFile()" type="file" accept="image/jpg" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
+      <input onchange="previewFile()" type="file" value="" accept="image/jpg" class="form-control col-form-label-lg" id="UserAvatar" name="UserAvatar">
     </div>
   </div>
 

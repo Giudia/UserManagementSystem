@@ -2,6 +2,71 @@
 
 require_once 'connection.php';
 
+function verify_login($email = null, $password = null, $token = null) {
+
+  require_once 'model/user.php';
+      
+  $result = [
+    'message' => 'Login effettuato',
+    'success' => true,
+  ];
+
+  if( $token !== $_SESSION['csrf']){
+    $result = [
+      'message' => 'ERRORE: Il token non corrisponde',
+      'success' => false,
+    ];
+
+    return $result;
+  }
+
+  $email = filter_var($email, FILTER_VALIDATE_EMAIL );
+
+  if (!$email){
+    $result = [
+      'message' => 'ERRORE: Email non valida',
+      'success' => false,
+    ];
+
+    return $result;
+  }
+
+  if(strlen($password)<6){
+    $result = [
+      'message' => 'ERRORE: Password troppo corta',
+      'success' => false,
+    ];
+
+    return $result;
+  }
+
+  $resEmail = getUser_byEmail($email);
+
+  if(!$resEmail){
+    $result = [
+      'message' => 'ERRORE: Utente non trovato',
+      'success' => false,
+    ];
+
+    return $result;
+  }
+
+  if(!password_verify($password, $resEmail['UserPassword'] )){
+    $result = [
+      'message' => 'ERRORE: Password errata',
+      'success' => false,
+    ];
+
+    return $result;
+  }
+
+  //Mi carico già anche l'array con i dati dell'utente
+  $result['user'] = $resEmail;
+
+  return $result;
+
+}
+
 function getConfig($parm, $default = null){
   require 'config.php';
   return array_key_exists($parm, $config)? $config[$parm] : $default;
@@ -174,18 +239,19 @@ function countUsers(array $parms = []){
     ];
 
     //Verifico che sia stato caricato almeno 1 file
-    if (empty($_FILES)){
-      //Se non è stato caricato restituisco l'errore senza continuare
+    if (empty($_FILES['UserAvatar']['name'])){
+      //Se non è stato caricato ritorno senza continuare
       $result['message'] = 'Nessun file caricato';
       return $result;
     };
 
+   // var_dump($result['message']); die;
+
     //Verifico se il file è stato caricato dal browser
-    //var_dump($_FILES['UserAvatar']);
-    //die;
 
     if(!is_uploaded_file($_FILES['UserAvatar']['tmp_name'])){
-      $result['message'] = 'Nessun file caricato da browser';
+      $result['success'] = 1;
+      $result['message'] = '';
       return $result;
     };
 
@@ -279,5 +345,5 @@ function countUsers(array $parms = []){
     if (file_exists($folder.'thumb_'.$file)){
       unlink($folder.'thumb_'.$file);
     }
-
+  
   }
