@@ -347,3 +347,16 @@ function countUsers(array $parms = []){
     }
   
   }
+
+  function isUserLoggedIn(){
+    
+    return $_SESSION['loggedin'] ?? false;
+  }
+
+  function GetUser_LoggedIn_Fullname(){
+    return $_SESSION['userData']['UserName'] ?? '';
+  }
+  
+  function GetUser_LoggedIn_Role(){
+    return $_SESSION['userData']['UserRoleType'] ?? '';
+  }

@@ -87,7 +87,7 @@
     $sql .= "UserName='$userName', UserEmail='$UserEmail', UserCodiceFiscale='$userCodiceFiscale',";
     $sql .= "UserEta=$UserEta ";
 
-    if ($data['UserAvatar']){
+    if($data['UserAvatar']){
       $sql .= ", UserAvatar = '$UserAvatar' ";
     }
 
@@ -147,6 +147,7 @@
       $result['success'] = false;
       $result['message'] = $conn->error;
     }
+    
     return $result;
   };
 

@@ -44,10 +44,9 @@
 
         $resAvatar = copyAvatar($res['UserID']);
 
-        if ($resAvatar['success']){
+        if($resAvatar['success']){
           UpdateUserAvatar($res['UserID'], $resAvatar['file_name']);
         }
-
       } else {
 
         $message ='Errore inserimento';
