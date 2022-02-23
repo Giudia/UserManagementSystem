@@ -1,5 +1,3 @@
-<?php require_once 'view/header.php'; ?>
+<?php require_once 'header.php'; ?>
 
-
-
-<?php require_once 'view/footer.php'; ?>
+<?php require_once 'footer.php'; ?>
