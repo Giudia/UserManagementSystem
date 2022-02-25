@@ -29,7 +29,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/view/elenco_genere.php">Genere</a></li>
             <li><a class="dropdown-item" href="/view/elenco_specie.php">Specie</a></li>
-            <li><a class="dropdown-item" href="" disable>Sottospecie</a></li>
+            <li><a class="dropdown-item" href="/view/elenco_sottospecie.php">Sottospecie</a></li>
             <li><a class="dropdown-item" href="/view/elenco_venditori.php">Venditori</a></li>
           </ul>
         </li>

@@ -64,28 +64,9 @@ function delete_genere(int $GenereID){
   
   }
 
-function GetSpecie(array $parms = []){
 
-  //Connessione al db
-  $conn = $GLOBALS['mysqli'];
 
-  //creo la query
-  $sql = 'SELECT * FROM specie inner join genere on genere.GenereID = specie.GenereID WHERE SpecieAttivo = 1 ORDER BY GenereNome';
-
-  $result = $conn->query($sql);
-
-  //Inizializzo la variabile  per evitare errori di php
-  $specie = [];
-
-  if ($result){
-      while($row = $result->fetch_assoc()){
-        $specie[] = $row;
-      }
-    };
-    return $specie;
-  }
-
-  function GetVenditori(array $parms = []){
+function GetVenditori(array $parms = []){
 
     //Connessione al db
     $conn = $GLOBALS['mysqli'];
@@ -153,7 +134,26 @@ function delete_venditore(int $VenditoreID){
     return $res && $conn->affected_rows;//controllo se ci sono righe 'interessate'
   
   }
+function GetSpecie(array $parms = []){
 
+    //Connessione al db
+    $conn = $GLOBALS['mysqli'];
+  
+    //creo la query
+    $sql = 'SELECT * FROM specie inner join genere on genere.GenereID = specie.GenereID WHERE SpecieAttivo = 1 ORDER BY GenereNome';
+  
+    $result = $conn->query($sql);
+  
+    //Inizializzo la variabile  per evitare errori di php
+    $specie = [];
+  
+    if ($result){
+        while($row = $result->fetch_assoc()){
+          $specie[] = $row;
+        }
+      };
+      return $specie;
+    }
 function save_specie(array $data = []){
 
   $result['success'] = 0;
@@ -193,15 +193,98 @@ function delete_specie(int $SpecieID){
 
   return $res && $conn->affected_rows;//controllo se ci sono righe 'interessate'
 
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function GetSottospecie(array $parms = []){
+  
+    //Connessione al db
+    $conn = $GLOBALS['mysqli'];
+  
+    //creo la query
+    $sql = 'SELECT * FROM sottospecie inner join specie on specie.SpecieID = sottospecie.SpecieID inner join genere on genere.GenereID = specie.GenereID WHERE SpecieAttivo = 1 ORDER BY GenereNome';
+  
+    $result = $conn->query($sql);
+  
+    //Inizializzo la variabile  per evitare errori di php
+    $sottospecie = [];
+  
+    if ($result){
+        while($row = $result->fetch_assoc()){
+          $sottospecie[] = $row;
+        }
+      };
+      return $sottospecie;
+  }
+function save_sottospecie(array $data=[]){
+
+  $result['success'] = 0;
+  $result['error'] = 'Nessun venditore';
+  $result['message'] = '';
+
+  $conn = $GLOBALS['mysqli'];
+
+  $SottospecieNome = $data['SottospecieNome']? $conn->escape_string($data['SottospecieNome']):'';
+  $SpecieID = $data['SpecieID']? $conn->escape_string($data['SpecieID']):'';
+
+  $sql = "INSERT INTO Sottospecie ";
+  $sql.= "(SpecieID,SottospecieNome) ";
+  $sql.= "VALUE ($SpecieID,'$SottospecieNome')";
+
+  $res = $conn->query($sql);
+
+  if($res){
+      $result['SottospecieID'] = $conn->insert_id;
+      $result['success'] = true;
+      $result['message'] = 'Nuova specie inserita';
+    }else {
+      $result['success'] = false;
+      $result['message'] = $conn->error;
+    }
+    
+    return $result;
+  }
+
+function delete_sottospecie($SottospecieID){
+  $conn = $GLOBALS['mysqli'];
+
+  $sql ="DELETE FROM sottospecie WHERE SottospecieID = $SottospecieID";
+
+  $res = $conn->query($sql);
+
+  return $res && $conn->affected_rows;//controllo se ci sono righe 'interessate'
+
 }
-
-
-
-
-
-
-
-
-
-
-?>
+  ?>
