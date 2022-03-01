@@ -15,7 +15,7 @@
     return $res && $conn->affected_rows;//controllo se ci sono righe 'interessate'
   };
 
-  function getUser(int $id){
+function getUser(int $id){
 
     /**
      * @var $conn mysqli
@@ -34,7 +34,6 @@
     return $result;
   };
 
-  
   function getUser_byEmail( string $UserEmail){
 
     /**

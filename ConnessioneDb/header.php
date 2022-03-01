@@ -15,5 +15,5 @@
   $search = getParms('search','');
   $page = getParms('page', 1);
 
-  require_once 'view\navbar.php';
+  require_once 'view\topbar.php';
  ?>

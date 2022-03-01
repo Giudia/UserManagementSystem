@@ -108,7 +108,7 @@ function getRandFiscalCode(){
 
   return $res;
 
-}
+  }
 
 function insertUser($userQta, mysqli $mysqli){
 
@@ -128,7 +128,7 @@ function insertUser($userQta, mysqli $mysqli){
       $userQta --;
     }
   }
-}
+  }
 
 function getUsers( array $parms = []){
 
@@ -158,7 +158,7 @@ function getUsers( array $parms = []){
     $orderDir = 'ASC';
   }
 
-  //query du caricamento utenti
+  //query di caricamento utenti
   $sql = 'SELECT * FROM utenti';
   if ($search) {
     $sql.= " WHERE UserName LIKE '%$search%'";
@@ -179,7 +179,7 @@ function getUsers( array $parms = []){
   };
 
   return $users;
-}
+  }
 
 
 function countUsers(array $parms = []){
@@ -210,7 +210,7 @@ function countUsers(array $parms = []){
     $sql.= " OR UserCodiceFiscale LIKE '%$search%'";
     $sql.= " OR UserEmail LIKE '%$search%'";
   }
-//echo $sql;
+  //echo $sql;
 
   $result = $conn->query($sql);
 
@@ -226,9 +226,9 @@ function countUsers(array $parms = []){
   };
 
   return $total;
-}
+  }
 
-  function copyAvatar(int $ID){
+function copyAvatar(int $ID){
     //salvo avatar utente
     
     //Inizializzo l'array di ritorno
@@ -326,7 +326,7 @@ function countUsers(array $parms = []){
 
   }
 
-  function RemoveOldAvatar(int $UserId, array $UserData = null) {
+function RemoveOldAvatar(int $UserId, array $UserData = null) {
 
     $UserData = ($UserData) ? : getUser($UserId);
     $file = $UserData['UserAvatar'];
@@ -348,15 +348,16 @@ function countUsers(array $parms = []){
   
   }
 
-  function isUserLoggedIn(){
+function isUserLoggedIn(){
     
     return $_SESSION['loggedin'] ?? false;
   }
 
-  function GetUser_LoggedIn_Fullname(){
+function GetUser_LoggedIn_Fullname(){
     return $_SESSION['userData']['UserName'] ?? '';
   }
   
-  function GetUser_LoggedIn_Role(){
+
+function GetUser_LoggedIn_Role(){
     return $_SESSION['userData']['UserRoleType'] ?? '';
   }

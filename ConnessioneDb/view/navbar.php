@@ -1,26 +1,9 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+<nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+
+  <div class="container-fluid d-flex justify-content-center py-3">
+    <div id="navbarNavAltMarkup">
       <div class="navbar-nav">
-
-        <?php
-          //Elenco utenti
-          $classActive = (stripos($url,'index') && empty($_GET['action']));
-          $class = $classActive? 'active':'';
-        ?>
-        <a class="nav-link <?= $class ?>"href="index.php"><i class="fas fa-users"></i> Users</a>
-
-        <?php
-          //Inserimento utente
-          $classActive = (stripos($url,'index') && !empty($_GET['action']) && $_GET['action'] === 'insert');
-          $class = $classActive? 'active':'';
-         ?>
-        <a class="nav-link <?= $class ?>" href="formUpdateUser.php?action=save"><i class="fas fa-user-plus"></i> Add user</a>
 
         <form class="form-inline mt-2 mt-md-0 d-flex" action="<?=$url?>" name="formSearch" id="formSearch" method="get" >
 
@@ -57,10 +40,7 @@
             <button class="btn btn-primary"  onclick="document.forms.formSearch.page.value=1" type="submit">Search</button>
           </div>
         </form>
-
       </div>
-
-
     </div>
   </div>
 </nav>

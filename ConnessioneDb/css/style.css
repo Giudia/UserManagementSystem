@@ -89,3 +89,12 @@ code {
   margin: 0 auto;
   border: #000 solid 1px;
 }
+
+/*login popup*/
+button:focus {
+  outline: 0;
+}
+
+.navbar .dropdown-menu .form-control {
+  width: 200px;
+}

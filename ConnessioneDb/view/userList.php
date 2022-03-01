@@ -1,11 +1,12 @@
 <?php
   // Al click inverto direzione ordinamento
   $orderDir = $orderDir === 'ASC' ? 'DESC' : 'ASC';
+
+  require_once 'navbar.php'
 ?>
 
 <table class='table table-striped'>
   <thead>
-    <tr><th colspan ="6" class="text-center"> Utenti totali: <?=$totalUsers?></th></tr>
     <tr>
       <th class="<?= ($orderby=='UserID')?$orderDir:'' ?>"><a href="<?=$url?>?<?=$orderByQueryString?>&orderDir=<?=$orderDir?>&orderby=UserID"> Id</th>
       <th>Avatar</th>
@@ -83,7 +84,7 @@
         <?php
       }?>
       </tbody>
-      <tfoot><tr><td colspan ="6">
+      <tfoot><tr><td colspan ="8">
       <?php require_once 'navigation.php';
       echo '</td></tr></tfoot>';
     }else{?>

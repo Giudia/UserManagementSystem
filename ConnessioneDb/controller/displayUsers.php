@@ -1,4 +1,4 @@
-i0<?php
+<?php
   //Settaggio parametri in GET
   $parms = [
     'orderby' => $orderby,

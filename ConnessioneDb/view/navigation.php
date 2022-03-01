@@ -2,6 +2,7 @@
   $numLinks = getConfig('numLinkNavigator', 3);
 ?>
 
+<div class="justify-content-center">
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item <?= $page == 1? 'disabled' : '' ?>">
@@ -40,3 +41,5 @@
     </li>
   </ul>
 </nav>
+
+</div>
