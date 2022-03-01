@@ -1,5 +1,12 @@
 <?php
-  require_once 'header.php'
+
+  session_start();
+  require_once 'header.php';
+  //controllo se l'utente è loggato
+  if(!isUserLoggedIn()){
+    header('Location: login.php');
+  exit;
+  }
 ?>
 
 <main role="main" class="container">
@@ -10,6 +17,14 @@
     $id = getParms('id', 0);
     $action = getParms('action', '');
 
+    $orderDir = getParms('orderDir', 'ASC');
+    $orderby = getParms('orderby');
+    $search = getParms('search' ,'') ;
+    $page = getParms('page',1);
+
+    $parms = compact('orderby','orderDir','page','search','action');
+    $defaultParms = http_build_query($parms, '','&amp;');
+
     if ($id) {
       $user = getUser($id);
     }else{
@@ -19,10 +34,12 @@
         'UserEmail' =>'',
         'UserCodiceFiscale' =>'',
         'UserEta' => '',
+        'UserAvatar' => '',
+        'UserPassword' => '',
+        'UserRoleType' => 'user',
       ];
     };
 
-    //var_dump($user);
     require_once 'view/formUser.php';
   ?>
 </main>
