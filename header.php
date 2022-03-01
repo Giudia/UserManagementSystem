@@ -1,6 +1,4 @@
 <?php
-  session_start();
-
   require_once 'function.php';
   require_once 'model/user.php';
   require_once 'view/head.php';
@@ -17,5 +15,5 @@
   $search = getParms('search','');
   $page = getParms('page', 1);
 
-  require_once 'view\navbar.php';
+  require_once 'view\topbar.php';
  ?>
