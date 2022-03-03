@@ -4,17 +4,19 @@ session_start();
 
 require_once 'function.php';
 
-//controllo se l'utente è loggato
-    if(isUserLoggedIn()){
-        header('Location: index.php');
-        exit;
-    }
-
     if(!empty($_POST)){
         //Occorre verificare che la richiesta di login provenga dal nosto sito e non da un altro.
         //Con un token salvato in sessione che deve coincidere
         //  echo $_SESSION['csrf'];
 
+        //controllo se sta facendo logout
+        if(!empty($_POST['action']) && $_POST['action'] = 'logout'){
+            
+            $_SESSION = [];
+            header('Location:login.php');
+            exit;
+            
+        }
         $token = $_POST['_csrf'] ?? '';
         $email =  $_POST['UserEmail'] ?? '';
         $password =  $_POST['UserPassword'] ?? '';

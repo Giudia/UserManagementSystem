@@ -82,20 +82,22 @@
 
 
   <div class="form-group row offset-md-2">
-    <?php if ($user['UserID']): ?>
+
+    <?php if ($user['UserID'] && UserCanDelete()): ?>
       <div class="col-auto">
         <a class="btn btn-danger" href="<?=$urlDelete?>?id=<?=$user['UserID']?>&action=delete" onclick="return confirm('Cancellare?')" >
           <i class="fas fa-user-times"></i> Cancella
         </a>
       </div>
     <?php endif ?>
-
-    <div class="col-auto ">
-      <button class="btn btn-success">
-        <i class="fas fa-user-edit"></i>
-        <?= $user['UserID']?'Aggiorna' : 'Inserisci'?>
-      </button>
-    </div>
+    <?php if (UserCanUpdate()): ?>
+      <div class="col-auto ">
+        <button class="btn btn-success">
+          <i class="fas fa-user-edit"></i>
+          <?= $user['UserID']?'Aggiorna' : 'Inserisci'?>
+        </button>
+      </div>
+    <?php endif ?>
   </div>
 
 </form>

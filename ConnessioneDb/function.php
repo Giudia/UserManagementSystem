@@ -13,7 +13,7 @@ function verify_login($email = null, $password = null, $token = null) {
 
   if( $token !== $_SESSION['csrf']){
     $result = [
-      'message' => 'ERRORE: Il token non corrisponde',
+      'message' => 'ERRORE DURANTE IL LOGIN', //'ERRORE: Il token non corrisponde',
       'success' => false,
     ];
 
@@ -33,7 +33,7 @@ function verify_login($email = null, $password = null, $token = null) {
 
   if(strlen($password)<6){
     $result = [
-      'message' => 'ERRORE: Password troppo corta',
+      'message' =>'ERRORE: Password errata', //'ERRORE: Password troppo corta',
       'success' => false,
     ];
 
@@ -356,8 +356,16 @@ function isUserLoggedIn(){
 function GetUser_LoggedIn_Fullname(){
     return $_SESSION['userData']['UserName'] ?? '';
   }
-  
-
 function GetUser_LoggedIn_Role(){
     return $_SESSION['userData']['UserRoleType'] ?? '';
   }
+function IsUserAdmin(){
+  return GetUser_LoggedIn_Role() ==='Admin';
+}
+function UserCanUpdate(){
+  $role = GetUser_LoggedIn_Role();
+  return $role === 'Admin' || $role === 'Editor';
+}
+function UserCanDelete(){
+  return IsUserAdmin();
+}

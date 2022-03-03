@@ -12,6 +12,16 @@
 ?>
 
 <section class="container">
+  
+  <?php 
+  // Se esiste un messaggio salvato in sessione lo visualizzo
+  if(!empty($_SESSION['message'])){
+  ?>
+  <div class="alert alert-info" id="message"> <?=$_SESSION['message']?></div>
+  <?php } 
+  $_SESSION['message']= '';
+  ?>
+
   <div class="loginForm">
     <form action="verify-login.php" method="POST">
 
@@ -36,5 +46,42 @@
 </section>
 
 <?php
-    require_once 'view/footer.php';
+  require_once 'view/footer.php';
 ?>
+
+<script>
+//Memorizzo la login
+
+$(
+  function (){
+    $('form').on('submit', function (evt){
+      evt.preventDefault();
+      const data = $(this).serialize();
+      //alert(data);
+      $.ajax({
+        method:'post',
+        data: data,
+        url: 'verify-login-ajax.php',
+        success: function(response){
+          const data = JSON.parse(response);
+          //verifico che il parsing sia andato a buon fine
+          if(data){
+
+            alert(data.message);
+
+            if(data.success){ 
+              location.href = 'index.php';
+            }
+          }
+
+        },
+        failure: function(){
+          alert('Problema di connessione al server')
+        },
+      })
+    })
+  }
+
+)
+  
+</script>

@@ -7,6 +7,10 @@
     header('Location: login.php');
   exit;
   }
+  if(!UserCanUpdate()){
+    header('Location: index.php');
+  exit;
+  }
 ?>
 
 <main role="main" class="container">

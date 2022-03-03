@@ -16,6 +16,8 @@
     case 'delete':
       // Cancellazione utente
 
+      if (!UserCanDelete()){break;} //Se l'utente non può cancellare esco direttamente
+
       $UserID = getParms('id', 0);
       $UserData = getUser($UserID);
       $res = deleteUser($UserID);
@@ -34,6 +36,8 @@
       break;
 
     case 'save':
+      
+      if (!UserCanUpdate()){break;} //Se l'utente non può aggiornare esco subito.
 
       $data = $_POST;
       $res = saveUser($data);
@@ -61,6 +65,8 @@
       break;
 
     case 'store':
+
+      if (!UserCanUpdate()){break;} //Se l'utente non può aggiornare esco subito.
 
       $data = $_POST;
       $UserID = $data['UserID'];

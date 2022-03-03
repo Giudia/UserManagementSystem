@@ -68,15 +68,18 @@
           <td><?= $user['UserRoleType'];?></td>
           <td>
             <div class="row">
-              <div class="col-4"><a class="btn btn-primary" href="<?=$urlUpdate?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=store&id=<?=$user['UserID']?>"><i class="fas fa-user-edit"></i> Update</a></div>
-
-              <div class="col-4">
-                <a class="btn btn-danger" onclick="return confirm('Confermi di voler cancellare?')"
-                  href="<?=$urlDelete?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=delete&id=<?=$user['UserID']?>">
-                  <i class="fas fa-user-times"></i> Delete
-                </a>
-              </div>
-
+              <?php if(UserCanUpdate()): ?>
+                <div class="col-4"><a class="btn btn-primary" href="<?=$urlUpdate?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=store&id=<?=$user['UserID']?>"><i class="fas fa-user-edit"></i> Update</a></div>
+              <?php endif ?>
+              
+              <?php if(UserCanDelete()):?>
+                <div class="col-4">
+                  <a class="btn btn-danger" onclick="return confirm('Confermi di voler cancellare?')"
+                    href="<?=$urlDelete?>?<?=$navOrderByQueryString?>&page=<?=$page?>&action=delete&id=<?=$user['UserID']?>">
+                    <i class="fas fa-user-times"></i> Delete
+                  </a>
+                </div>
+              <?php endif ?>
             </div>
           </td>
         </tr>

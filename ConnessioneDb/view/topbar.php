@@ -28,36 +28,56 @@
 
             <div class="d-flex collapse navbar-collapse col-md-3 justify-content-end" id="navbarNavDarkDropdown">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <form class="px-4 py-3">
-                            <div class="mb-3">
-                            <label for="exampleDropdownFormEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+
+                    <?php 
+                        if(isUserLoggedIn()):
+                    ?>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profilo
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end justify-content-center">
+                                <div class="mt-3 text-center text-uppercase">
+                                    <?=GetUser_LoggedIn_Fullname()?>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <?=GetUser_LoggedIn_Role()?>
+                                </div>
+                                <!--pulsante logout-->
+                                 <div class="mt-3 d-flex justify-content-center">
+                                    <form action="../verify-login.php" method="POST" role="form">
+                                        <input type="hidden" name="action" value="logout">
+                                        <button class="btn btn-outline-primary">Logout</button>
+                                    </form>
+                                </div>
+                                <!--
+                                <form class="px-4 py-3">
+                                    <div class="mb-3">
+                                    <label for="exampleDropdownFormEmail1" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                    </div>
+                                    <div class="mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                        <label class="form-check-label" for="dropdownCheck">
+                                        Remember me
+                                        </label>
+                                    </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Log in</button>
+                                </form>-->
+
                             </div>
-                            <div class="mb-3">
-                            <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-                            </div>
-                            <div class="mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                Remember me
-                                </label>
-                            </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Log in</button>
-                        </form>
-                        <!--
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">New around here? Sign up</a>
-                        <a class="dropdown-item" href="#">Forgot password?</a>-->
-                    </div>
-                    </li>
+                        </li>
+                    <?php else: ?>
+                      <a class="btn btn-success btn-lg" href="../login.php">Login</a>
+
+                    <?php endif ?>
                 </ul>
             </div>
             
