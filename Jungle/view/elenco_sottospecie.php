@@ -42,7 +42,7 @@
                     foreach($sottospecies as $Sottospecie):
                 ?>        
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <span class="badge bg-danger rounded-pill mx-3"><a href="../controller/update_specie.php?action=delete&SottospecieID=<?=$Sottospecie['SottospecieID']?>"><i class="fa-solid fa-xmark"></i></a></span>    
+                            <span class="badge bg-danger rounded-pill mx-3"><a href="../controller/update_sottospecie.php?action=delete&SottospecieID=<?=$Sottospecie['SottospecieID']?>"><i class="fa-solid fa-xmark"></i></a></span>    
                             <div class="col-md-3 me-auto"><?=$Sottospecie['GenereNome']?></div>
                             <div class="col-md-5 me-auto"><?=$Sottospecie['SpecieNome']?></div>
                             <div class="col-md-5 me-auto"><?=$Sottospecie['SottospecieNome']?></div>

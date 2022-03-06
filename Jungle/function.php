@@ -286,5 +286,53 @@ function delete_sottospecie($SottospecieID){
 
   return $res && $conn->affected_rows;//controllo se ci sono righe 'interessate'
 
+  }
+function GetPiante(array $parms = []){
+  
+  //Connessione al db
+  $conn = $GLOBALS['mysqli'];
+
+  //creo la query
+  $sql = 'SELECT * FROM piante inner join specie on specie.SpecieID = piante.SpecieID inner join genere on genere.GenereID = piante.GenereID WHERE PiantaAttivo = 1';
+
+  $result = $conn->query($sql);
+
+  //Inizializzo la variabile  per evitare errori di php
+  $piante = [];
+
+  if ($result){
+      while($row = $result->fetch_assoc()){
+        $piante[] = $row;
+      }
+    };
+    return $piante;
 }
+function save_pianta(array $data=[]){
+
+  $result['success'] = 0;
+  $result['error'] = 'Nessuna pianta';
+  $result['message'] = '';
+
+  $conn = $GLOBALS['mysqli'];
+
+  $Pianta = $data['SottospecieNome']? $conn->escape_string($data['SottospecieNome']):'';
+  $SpecieID = $data['SpecieID']? $conn->escape_string($data['SpecieID']):'';
+
+  $sql = "INSERT INTO Sottospecie ";
+  $sql.= "(SpecieID,SottospecieNome) ";
+  $sql.= "VALUE ($SpecieID,'$SottospecieNome')";
+
+  $res = $conn->query($sql);
+
+  if($res){
+      $result['SottospecieID'] = $conn->insert_id;
+      $result['success'] = true;
+      $result['message'] = 'Nuova specie inserita';
+    }else {
+      $result['success'] = false;
+      $result['message'] = $conn->error;
+    }
+    
+    return $result;
+  }
   ?>

@@ -10,7 +10,7 @@
         
         case 'delete':
 
-            $SpecieID = getParms('SpecieID');
+            $SottospecieID = getParms('SottospecieID');
             delete_sottospecie($SottospecieID);
 
             header('location:../view/elenco_sottospecie.php?');
